@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const baseDir = path.dirname(require('require-main-filename')())
 const mdParser = require('markdown-it')()
 
 const markdown = {
@@ -8,7 +7,7 @@ const markdown = {
 }
 
 function readMarkdown(fileName) {
-	const filePath = path.join(baseDir, `./src/data/${fileName}.md`)
+	const filePath = path.join(process.cwd(), `/src/data/${fileName}.md`)
 
 	try {
 		return fs.readFileSync(filePath, 'utf-8')
