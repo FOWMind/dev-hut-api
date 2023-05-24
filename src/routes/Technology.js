@@ -13,7 +13,10 @@ router.get('/:name', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { name, description, categories } = req.body
 
-  if (!req.body || Object.entries(req.body).length === 0) {
+  if (
+    !req.body || Object.entries(req.body).length === 0
+    !name || !description || !categories
+  ) {
     res.status(400).json({ message: 'bad request' })
     return
   }
