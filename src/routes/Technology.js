@@ -1,21 +1,19 @@
 const express = require('express')
+
 const markdown = require('../lib/markdown')
+const { TechnologyByName } = require('../controllers')
 const { Technology } = require('../models')
 
 const router = express.Router()
 
-router.get('/:name', (req, res, next) => {
-	const { name } = req.params
-	const md = markdown.parse(name)
-	res.status(200).send({ html: md })
-})
+router.get('/:name', TechnologyByName)
 
 router.post('/', (req, res, next) => {
   const { name, description, categories } = req.body
 
   if (
     !req.body || Object.entries(req.body).length === 0
-    !name || !description || !categories
+    || !name || !description || !categories
   ) {
     res.status(400).json({ message: 'bad request' })
     return
