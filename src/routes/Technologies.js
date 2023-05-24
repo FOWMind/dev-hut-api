@@ -1,9 +1,9 @@
 const express = require('express')
 
+const { Technologies } = require('../controllers')
+
 const router = express.Router()
 
-router.get('/', (req, res, nex) => {
-  res.send([{ id: 0, name: 'html', description: 'HTML is a markup language' }])
-})
+router.get('/', Technologies)
 
 module.exports = router

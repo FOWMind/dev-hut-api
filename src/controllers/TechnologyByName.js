@@ -11,8 +11,12 @@ const TechnologyByName = (req, res, next) => {
 
   Technology.findOne({ name })
     .then((doc) => {
-      const md = markdown.parse(name) 
-      res.status(200).json({ doc, html: md })
+      if (!doc) {
+        res.status(404).json({ message: 'not found' })
+        return
+      }
+      const md = markdown.parse(name)
+      res.status(200).json({ ...doc._doc, html: md })
       return
     })
     .catch((err) => {
