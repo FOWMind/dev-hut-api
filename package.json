@@ -1,7 +1,9 @@
 {
 	"dependencies": {
+		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"markdown-it": "^13.0.1",
+		"mongoose": "^7.2.0",
 		"require-main-filename": "^2.0.0"
 	},
 	"name": "dev-hut-api",
