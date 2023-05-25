@@ -21,12 +21,12 @@ const TechnologyAdd = (req, res, next) => {
   Technology.create(newTechnology)
     .then(doc => {
       console.log('Technology added at ', newTechnology.createdAt)
-      res.status(201).json({ message: 'Technology added', data: doc })
+      res.status(201).json({ message: 'technology added', data: doc })
       return
     })
     .catch(err => {
       // next(err)
-      res.status(409).json({ message: 'Error while adding technology' })
+      res.status(409).json({ message: 'error while adding technology' })
       return
     })
 }

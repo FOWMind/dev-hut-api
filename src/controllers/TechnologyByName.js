@@ -2,13 +2,14 @@ const markdown = require('../lib/markdown')
 const { Technology } = require('../models')
 
 const TechnologyByName = (req, res, next) => {
-	const name = req.params.name.toLowerCase()
+	let { name } = req.params
 
   if (!name) {
     res.status(400).json({ message: 'bad request' })
     return
   }
 
+  name = name.toLowerCase()
   Technology.findOne({ name })
     .then((doc) => {
       if (!doc) {
