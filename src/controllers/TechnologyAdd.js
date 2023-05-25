@@ -25,7 +25,7 @@ const TechnologyAdd = (req, res, next) => {
       return
     })
     .catch(err => {
-      // next(err)
+      if (err) next(err)
       res.status(409).json({ message: 'error while adding technology' })
       return
     })

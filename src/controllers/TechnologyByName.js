@@ -21,8 +21,7 @@ const TechnologyByName = (req, res, next) => {
       return
     })
     .catch((err) => {
-      // next(err)
-      console.error(err)
+      if (err) next(err)
       res.status(404).json({ message: 'not found' })
       return
     })

@@ -13,8 +13,7 @@ const TechnologyDelete = (req, res, next) => {
       return
     })
     .catch(err => {
-      // next(err)
-      console.log(err)
+      if (err) next(err)
       res.status(409).json({ message: 'error while deleting technology' })
       return
     })
