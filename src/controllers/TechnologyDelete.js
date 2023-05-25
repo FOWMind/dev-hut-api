@@ -1,8 +1,12 @@
+const mongoose = require('mongoose')
+
+const { validObjectId } = require('../utils')
 const { Technology } = require('../models')
 
 const TechnologyDelete = (req, res, next) => {
   const { id } = req.params
-  if (!id) {
+
+  if (!id || !validObjectId(id)) {
     res.status(400).json({ message: 'bad request' })
     return
   }

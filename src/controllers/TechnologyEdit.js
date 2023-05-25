@@ -1,10 +1,16 @@
+const { validObjectId } = require('../utils')
 const { Technology } = require('../models')
 
 const TechnologyEdit = (req, res, next) => {
   const { id } = req.params
   const update = req.body
 
-  if (!id || !req.body || Object.entries(update).length === 0) {
+  if (
+    !id ||
+    !validObjectId(id) ||
+    !req.body ||
+    Object.entries(update).length === 0
+  ) {
     res.status(400).json({ message: 'bad request' })
     return
   }
