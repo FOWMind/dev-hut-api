@@ -9,7 +9,12 @@ const TechnologyDelete = (req, res, next) => {
 
   Technology.findOneAndDelete({ _id: id })
     .then(doc => {
-      res.status(200).json({ message: 'deleted successfully' })
+      if (!doc) {
+        res.status(404).json({ message: 'not found' })
+        return
+      }
+
+      res.status(200).json({ message: 'technology deleted successfully' })
       return
     })
     .catch(err => {
