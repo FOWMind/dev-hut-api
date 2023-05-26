@@ -1,4 +1,5 @@
 const { Technology } = require('../models')
+const { HTTP_RESPONSES: { CREATED, BAD_REQUEST, CONFLICT } } = require('../constants')
 
 const TechnologyAdd = async (req, res, next) => {
   const { name, description, categories } = req.body
@@ -7,14 +8,14 @@ const TechnologyAdd = async (req, res, next) => {
     !req.body || Object.entries(req.body).length === 0
     || !name || !description || !categories
   ) {
-    res.status(400).json({ message: 'bad request' })
+    res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
   }
 
   // use await to control the promises order
   const technologyCount = await Technology.countDocuments({ name: name?.toString()?.toLowerCase() }, { limit: 1 })
   if (technologyCount > 0) {
-    res.status(409).json({ message: 'a technology with that name already exist' })
+    res.status(CONFLICT.CODE).json({ message: 'a technology with that name already exist' })
     return
   }
 
@@ -28,12 +29,12 @@ const TechnologyAdd = async (req, res, next) => {
   Technology.create(newTechnology)
     .then(doc => {
       console.log('Technology added at ', newTechnology.createdAt)
-      res.status(201).json({ message: 'technology added', data: doc })
+      res.status(CREATED.CODE).json({ message: 'technology added', data: doc })
       return
     })
     .catch(err => {
       if (err) next(err)
-      res.status(409).json({ message: 'error while adding technology' })
+      res.status(CONFLICT.CODE).json({ message: 'error while adding technology' })
       return
     })
 }

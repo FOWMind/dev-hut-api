@@ -2,28 +2,29 @@ const mongoose = require('mongoose')
 
 const { validObjectId } = require('../utils')
 const { Technology } = require('../models')
+const { HTTP_RESPONSES: { SUCCESS, BAD_REQUEST, NOT_FOUND, CONFLICT } } = require('../constants')
 
 const TechnologyDelete = (req, res, next) => {
   const { id } = req.params
 
   if (!id || !validObjectId(id)) {
-    res.status(400).json({ message: 'bad request' })
+    res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
   }
 
   Technology.findOneAndDelete({ _id: id })
     .then(doc => {
       if (!doc) {
-        res.status(404).json({ message: 'not found' })
+        res.status(NOT_FOUND.CODE).json(NOT_FOUND.JSON)
         return
       }
 
-      res.status(200).json({ message: 'technology deleted successfully' })
+      res.status(SUCCESS.CODE).json({ message: 'technology deleted successfully' })
       return
     })
     .catch(err => {
       if (err) next(err)
-      res.status(409).json({ message: 'error while deleting technology' })
+      res.status(CONFLICT.CODE).json({ message: 'error while deleting technology' })
       return
     })
 }

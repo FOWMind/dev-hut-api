@@ -1,5 +1,6 @@
 const { validObjectId } = require('../utils')
 const { Technology } = require('../models')
+const { HTTP_RESPONSES: { SUCCESS, BAD_REQUEST, CONFLICT } } = require('../constants')
 
 const TechnologyEdit = (req, res, next) => {
   const { id } = req.params
@@ -11,18 +12,18 @@ const TechnologyEdit = (req, res, next) => {
     !req.body ||
     Object.entries(update).length === 0
   ) {
-    res.status(400).json({ message: 'bad request' })
+    res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
   }
 
   Technology.findOneAndUpdate({ _id: id }, update, { new: true })
     .then((doc) => {
-      res.status(200).json({ message: 'technology edited successfully', data: doc })
+      res.status(SUCCESS.CODE).json({ message: 'technology edited successfully', data: doc })
       return
     })
     .catch(err => {
       if (err) next(err)
-      res.status(409).json({ message: 'error while editing technology' })
+      res.status(CONFLICT.CODE).json({ message: 'error while editing technology' })
       return
     })
 }

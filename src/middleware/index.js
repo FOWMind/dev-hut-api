@@ -1,4 +1,4 @@
-const { badRequest } = require('./badRequest')
+const { requestHandler } = require('./requestHandler')
 const { errorHandler } = require('./errorHandler')
 
-module.exports = { badRequest, errorHandler }
+module.exports = { requestHandler, errorHandler }
