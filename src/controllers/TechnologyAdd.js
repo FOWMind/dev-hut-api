@@ -1,6 +1,6 @@
 const { Technology } = require('../models')
 
-const TechnologyAdd = (req, res, next) => {
+const TechnologyAdd = async (req, res, next) => {
   const { name, description, categories } = req.body
 
   if (
@@ -8,6 +8,13 @@ const TechnologyAdd = (req, res, next) => {
     || !name || !description || !categories
   ) {
     res.status(400).json({ message: 'bad request' })
+    return
+  }
+
+  // use await to control the promises order
+  const technologyCount = await Technology.countDocuments({ name: name?.toString()?.toLowerCase() }, { limit: 1 })
+  if (technologyCount > 0) {
+    res.status(409).json({ message: 'a technology with that name already exist' })
     return
   }
 
