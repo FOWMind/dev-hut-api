@@ -16,7 +16,8 @@ const TechnologyEdit = (req, res, next) => {
     return
   }
 
-  Technology.findOneAndUpdate({ _id: id }, update, { new: true })
+  const newContent = { ...update, editedAt: new Date() }
+  Technology.findOneAndUpdate({ _id: id }, newContent, { new: true })
     .then((doc) => {
       res.status(SUCCESS.CODE).json({ message: 'technology edited successfully', data: doc })
       return

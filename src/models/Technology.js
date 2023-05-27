@@ -7,6 +7,8 @@ const technologySchema = new Schema({
   },
   description: String,
   categories: [String],
+  createdAt: Date,
+  editedAt: Date,
 })
 
 const Technology = model('Technology', technologySchema)
