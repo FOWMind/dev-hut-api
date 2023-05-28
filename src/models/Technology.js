@@ -1,12 +1,10 @@
 const { model, Schema } = require('mongoose')
 
 const technologySchema = new Schema({
-  name: {
-    type: String,
-    lowercase: true,
-  },
+  name: String,
   description: String,
   categories: [String],
+  identifier: String,
   createdAt: Date,
   editedAt: Date,
 })

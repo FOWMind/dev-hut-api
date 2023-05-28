@@ -2,19 +2,23 @@ const { Technology } = require('../models')
 const { HTTP_RESPONSES: { CREATED, BAD_REQUEST, CONFLICT } } = require('../constants')
 
 const TechnologyAdd = async (req, res, next) => {
-  const { name, description, categories } = req.body
+  const { name, description, categories, identifier } = req.body
 
   if (
     Object.entries(req.body).length === 0 ||
-    !req.body || !name || !description || !categories
+    !req.body ||
+    !name ||
+    !description ||
+    !categories ||
+    !identifier
   ) {
     res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
   }
 
-  const technologyCount = await Technology.countDocuments({ name: name?.toString()?.toLowerCase() }, { limit: 1 })
+  const technologyCount = await Technology.countDocuments({ identifier }, { limit: 1 })
   if (technologyCount > 0) {
-    res.status(CONFLICT.CODE).json({ message: 'a technology with that name already exist' })
+    res.status(CONFLICT.CODE).json({ message: 'a technology with that identifier already exist' })
     return
   }
 
@@ -22,6 +26,7 @@ const TechnologyAdd = async (req, res, next) => {
     name,
     description,
     categories,
+    identifier,
     createdAt: new Date(),
   }
 
