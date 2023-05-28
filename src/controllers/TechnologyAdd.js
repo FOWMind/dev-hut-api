@@ -5,14 +5,13 @@ const TechnologyAdd = async (req, res, next) => {
   const { name, description, categories } = req.body
 
   if (
-    !req.body || Object.entries(req.body).length === 0
-    || !name || !description || !categories
+    Object.entries(req.body).length === 0 ||
+    !req.body || !name || !description || !categories
   ) {
     res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
   }
 
-  // use await to control the promises order
   const technologyCount = await Technology.countDocuments({ name: name?.toString()?.toLowerCase() }, { limit: 1 })
   if (technologyCount > 0) {
     res.status(CONFLICT.CODE).json({ message: 'a technology with that name already exist' })

@@ -5,7 +5,7 @@ require('./src/lib/mongoose')
 
 const app = express()
 
-const { technologyRoute, technologiesRoute } = require('./src/routes')
+const { technologyRoute, technologiesRoute, courseRoute } = require('./src/routes')
 const { requestHandler, errorHandler } = require('./src/middleware')
 
 const { PORT = 3001 } = process.env.PORT || {}
@@ -15,6 +15,7 @@ app.use(express.json())
 // Routes
 app.use('/technology', technologyRoute)
 app.use('/technologies', technologiesRoute)
+app.use('/course', courseRoute)
 
 // Middlewares
 app.use(requestHandler)

@@ -4,9 +4,11 @@ const { lessonSchema } = require('./Lesson')
 
 const courseSchema = new Schema({
   name: String,
-  banner: String,
+  description: String,
+  banner: { img: String, },
   lessons: [lessonSchema],
   categories: [String],
+  identifier: String,
   createdAt: Date,
   editedAt: Date,
 })
