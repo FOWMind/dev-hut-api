@@ -10,6 +10,7 @@ app.use(express.json())
 // Routes
 app.use('/technology', technologyRoute)
 
+
 app.listen(PORT, () => {
 	console.log(`Listening at port ${PORT}`)
 })
