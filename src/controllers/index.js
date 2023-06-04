@@ -12,6 +12,7 @@ const { Courses } = require('./Courses')
 
 const { LessonAdd } = require('./LessonAdd')
 const { LessonById } = require('./LessonById')
+const { Lessons } = require('./Lessons')
 
 module.exports = {
   TechnologyByName,
@@ -26,4 +27,5 @@ module.exports = {
   Courses,
   LessonAdd,
   LessonById,
+  Lessons,
 }
