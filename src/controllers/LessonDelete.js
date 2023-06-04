@@ -1,8 +1,8 @@
 const { validObjectId } = require('../utils')
-const { Technology } = require('../models')
+const { Lesson } = require('../models')
 const { HTTP_RESPONSES: { SUCCESS, BAD_REQUEST, NOT_FOUND, CONFLICT } } = require('../constants')
 
-const TechnologyDelete = (req, res, next) => {
+const LessonDelete = (req, res, next) => {
   const { id } = req.params
 
   if (!id || !validObjectId(id)) {
@@ -10,21 +10,21 @@ const TechnologyDelete = (req, res, next) => {
     return
   }
 
-  Technology.findOneAndDelete({ _id: id })
+  Lesson.findOneAndDelete({ _id: id })
     .then(doc => {
       if (!doc) {
         res.status(NOT_FOUND.CODE).json(NOT_FOUND.JSON)
         return
       }
 
-      res.status(SUCCESS.CODE).json({ message: 'technology deleted successfully' })
+      res.status(SUCCESS.CODE).json({ message: 'lesson deleted successfully' })
       return
     })
     .catch(err => {
       if (err) next(err)
-      res.status(CONFLICT.CODE).json({ message: 'error while deleting technology' })
+      res.status(CONFLICT.CODE).json({ message: 'error while deleting lesson' })
       return
     })
 }
 
-module.exports = { TechnologyDelete }
+module.exports = { LessonDelete }
