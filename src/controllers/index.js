@@ -11,6 +11,7 @@ const { CourseDelete } = require('./CourseDelete')
 const { Courses } = require('./Courses')
 
 const { LessonAdd } = require('./LessonAdd')
+const { LessonById } = require('./LessonById')
 
 module.exports = {
   TechnologyByName,
@@ -24,4 +25,5 @@ module.exports = {
   CourseDelete,
   Courses,
   LessonAdd,
+  LessonById,
 }
