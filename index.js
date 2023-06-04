@@ -23,6 +23,7 @@ app.use('/lesson', lessonRoute)
 app.use(requestHandler)
 app.use(errorHandler)
 
+
 app.listen(PORT, () => {
 	console.log(`Listening at port ${PORT}`)
 })
