@@ -3,7 +3,9 @@ const { model, Schema } = require('mongoose')
 const lessonSchema = new Schema({
   name: String,
   description: String,
-  content: String,
+  contentFileName: String,
+  identifier: String,
+  courseId: String,
   createdAt: Date,
   editedAt: Date,
 })
