@@ -5,7 +5,7 @@ const lessonSchema = new Schema({
   description: String,
   contentFileName: String,
   identifier: String,
-  courseId: String,
+  courseId: { type: Schema.Types.ObjectId, ref: 'Course' },
   createdAt: Date,
   editedAt: Date,
 })

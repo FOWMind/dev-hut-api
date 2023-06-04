@@ -1,5 +1,6 @@
+const { validObjectId } = require('../utils')
 const { HTTP_RESPONSES: { CREATED, BAD_REQUEST, CONFLICT } } = require('../constants')
-const { Lesson } = require('../models')
+const { Lesson, Course } = require('../models')
 
 const LessonAdd = async (req, res, next) => {
   const { name, description, contentFileName, identifier, courseId } = req.body
@@ -11,7 +12,8 @@ const LessonAdd = async (req, res, next) => {
     !description ||
     !contentFileName ||
     !identifier ||
-    !courseId
+    !courseId ||
+    !validObjectId(courseId)
   ) {
     res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
@@ -23,17 +25,26 @@ const LessonAdd = async (req, res, next) => {
     return
   }
 
+  const relatedCourse = await Course.findById(courseId)
+  if (!relatedCourse) {
+    res.status(BAD_REQUEST.CODE).json({ message: 'cannot find course with that id' })
+    return
+  }
+
   const newLesson = {
     name,
     description,
     contentFileName,
     identifier,
-    courseId,
+    courseId: relatedCourse._id,
     createdAt: new Date(),
   }
 
   Lesson.create(newLesson)
-    .then(createdLesson => {
+    .then(async createdLesson => {
+      relatedCourse.lessons.push(createdLesson._id)
+      await relatedCourse.save()
+
       console.log('Lesson created at ', newLesson.createdAt)
       res.status(CREATED.CODE).json({ message: 'lesson created successfully', data: createdLesson })
       return

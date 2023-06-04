@@ -6,7 +6,7 @@ const courseSchema = new Schema({
   name: String,
   description: String,
   banner: { img: String, },
-  lessons: [lessonSchema],
+  lessons: [{ type: Schema.Types.ObjectId, ref: 'Lesson' }],
   categories: [String],
   identifier: String,
   createdAt: Date,

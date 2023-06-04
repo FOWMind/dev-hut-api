@@ -10,20 +10,23 @@ const CourseById = (req, res, next) => {
     return
   }
 
-  Course.findById(id)
-    .then(doc => {
-      if (!doc) {
-        res.status(NOT_FOUND.CODE).json(NOT_FOUND.JSON)
-        return
-      }
+  Course
+    .findById(id)
+    .populate('lessons')
+    .exec()
+      .then(doc => {
+        if (!doc) {
+          res.status(NOT_FOUND.CODE).json(NOT_FOUND.JSON)
+          return
+        }
 
-      res.status(SUCCESS.CODE).json(doc)
-      return
-    })
-    .catch(err => {
-      if (err) next(err)
-      res.status(CONFLICT.CODE).json({ message: 'error finding course' })
-    })
+        res.status(SUCCESS.CODE).json(doc)
+        return
+      })
+      .catch(err => {
+        if (err) next(err)
+        res.status(CONFLICT.CODE).json({ message: 'error finding course' })
+      })
 }
 
 module.exports = { CourseById }
