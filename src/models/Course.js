@@ -8,6 +8,7 @@ const courseSchema = new Schema({
   banner: { img: String, },
   lessons: [{ type: Schema.Types.ObjectId, ref: 'Lesson' }],
   categories: [String],
+  technologies: [String],
   identifier: String,
   createdAt: Date,
   editedAt: Date,

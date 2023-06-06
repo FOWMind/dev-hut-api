@@ -2,7 +2,7 @@ const { HTTP_RESPONSES: { CREATED, BAD_REQUEST, CONFLICT } } = require('../const
 const { Course } = require('../models')
 
 const CourseAdd = async (req, res, next) => {
-  const { name, description, banner, lessons, categories, identifier } = req.body
+  const { name, description, banner, lessons, categories, technologies, identifier } = req.body
 
   if (
     Object.entries(req.body).length === 0 ||
@@ -11,6 +11,7 @@ const CourseAdd = async (req, res, next) => {
     !description ||
     !banner?.img ||
     !categories ||
+    !technologies ||
     !identifier
   ) {
     res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
@@ -29,6 +30,7 @@ const CourseAdd = async (req, res, next) => {
     banner,
     lessons: lessons || [],
     categories,
+    technologies,
     identifier,
     createdAt: new Date(),
   }
