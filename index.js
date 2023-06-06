@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
 require('./src/lib/mongoose')
@@ -18,6 +19,7 @@ const { requestHandler, errorHandler } = require('./src/middleware')
 
 const { PORT = 3001 } = process.env.PORT || {}
 
+app.use(cors())
 app.use(express.json())
 
 // Routes
