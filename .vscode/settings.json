@@ -1,3 +1,3 @@
 {
-	"conventionalCommits.scopes": ["deploy", "path"]
+	"conventionalCommits.scopes": ["deploy", "path", "api"]
 }
