@@ -16,20 +16,23 @@ const { LessonDelete } = require('./LessonDelete')
 const { LessonEdit } = require('./LessonEdit')
 const { Lessons } = require('./Lessons')
 
+const { Collaborators } = require('./Collaborators')
+
 module.exports = {
-  TechnologyByName,
-  TechnologyAdd,
-  TechnologyDelete,
-  TechnologyEdit,
-  Technologies,
-  CourseById,
-  CourseAdd,
-  CourseEdit,
-  CourseDelete,
-  Courses,
-  LessonAdd,
-  LessonById,
-  LessonDelete,
-  LessonEdit,
-  Lessons,
+	TechnologyByName,
+	TechnologyAdd,
+	TechnologyDelete,
+	TechnologyEdit,
+	Technologies,
+	CourseById,
+	CourseAdd,
+	CourseEdit,
+	CourseDelete,
+	Courses,
+	LessonAdd,
+	LessonById,
+	LessonDelete,
+	LessonEdit,
+	Lessons,
+	Collaborators,
 }
