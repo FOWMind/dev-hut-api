@@ -11,16 +11,12 @@ const CoursesByTechnology = (req, res, next) => {
   
   Course.find({ technologies: technology })
     .then((courses) => {
-      if (!courses) {
-        res.status(NOT_FOUND.CODE).json(NOT_FOUND.JSON)
-        return
-      }
       res.status(SUCCESS.CODE).json(courses)
       return
     })
     .catch(err => {
       if (err) next(err)
-      res.status(CONFLICT.CODE).json({ message: 'error while trying to get technologies ' })
+      res.status(CONFLICT.CODE).json({ message: 'error while trying to get technologies' })
       return
     })
 }
