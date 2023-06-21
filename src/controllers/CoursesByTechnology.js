@@ -2,13 +2,14 @@ const { HTTP_RESPONSES: { SUCCESS, BAD_REQUEST, CONFLICT } } = require('../const
 const { Course } = require('../models')
 
 const CoursesByTechnology = (req, res, next) => {
-  const { technology } = req.params
+  let { technology } = req.params
 
   if (!technology) {
     res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
   }
   
+  technology = technology.toLowerCase()
   Course.find({ technologies: technology })
     .then((courses) => {
       res.status(SUCCESS.CODE).json(courses)

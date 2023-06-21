@@ -4,6 +4,7 @@ const { TechnologyDelete } = require('./TechnologyDelete')
 const { TechnologyEdit } = require('./TechnologyEdit')
 const { Technologies } = require('./Technologies')
 
+const { CourseByIdentifier } = require('./CourseByIdentifier')
 const { CourseById } = require('./CourseById')
 const { CourseAdd } = require('./CourseAdd')
 const { CourseEdit } = require('./CourseEdit')
@@ -25,7 +26,8 @@ module.exports = {
 	TechnologyDelete,
 	TechnologyEdit,
 	Technologies,
-	CourseById,
+  CourseByIdentifier,
+  CourseById,
 	CourseAdd,
 	CourseEdit,
 	CourseDelete,

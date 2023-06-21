@@ -16,8 +16,6 @@ const {
 
 const { requestHandler, errorHandler } = require('./src/middleware')
 
-const { PORT = 3001 } = process.env.PORT || {}
-
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -41,6 +39,7 @@ app.use('/collaborators', collaboratorsRoute)
 app.use(requestHandler)
 app.use(errorHandler)
 
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
 	console.log(`Listening at port ${PORT}`)
 })
