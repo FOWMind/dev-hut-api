@@ -10,7 +10,10 @@ const CoursesByTechnology = (req, res, next) => {
   }
   
   technology = technology.toLowerCase()
-  Course.find({ technologies: technology })
+  Course
+    .find({ technologies: technology })
+    .populate('lessons')
+    .exec()
     .then((courses) => {
       res.status(SUCCESS.CODE).json(courses)
       return
