@@ -9,6 +9,7 @@ const { CourseAdd } = require('./CourseAdd')
 const { CourseEdit } = require('./CourseEdit')
 const { CourseDelete } = require('./CourseDelete')
 const { Courses } = require('./Courses')
+const { CoursesByTechnology } = require('./CoursesByTechnology')
 
 const { LessonAdd } = require('./LessonAdd')
 const { LessonById } = require('./LessonById')
@@ -29,6 +30,7 @@ module.exports = {
 	CourseEdit,
 	CourseDelete,
 	Courses,
+  CoursesByTechnology,
 	LessonAdd,
 	LessonById,
 	LessonDelete,
