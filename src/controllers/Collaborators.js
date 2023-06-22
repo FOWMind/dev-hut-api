@@ -14,7 +14,7 @@ const Collaborators = async (req, res, next) => {
 		res.status(SUCCESS.CODE).json(collaborators)
 	} catch (err) {
 		if (err) next(err)
-		res.status(CONFLICT.CODE).json({ message: 'error while getting repository collaborators' })
+		res.status(CONFLICT.CODE).json({ message: 'error while trying to get repository collaborators' })
 	}
 }
 

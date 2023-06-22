@@ -20,7 +20,7 @@ const CoursesByTechnology = (req, res, next) => {
     })
     .catch(err => {
       if (err) next(err)
-      res.status(CONFLICT.CODE).json({ message: 'error while trying to get technologies' })
+      res.status(CONFLICT.CODE).json({ message: 'error while trying to get courses' })
       return
     })
 }

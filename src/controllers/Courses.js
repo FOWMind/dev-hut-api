@@ -1,4 +1,4 @@
-const { HTTP_RESPONSES: { SUCCESS, NOT_FOUND } } = require('../constants')
+const { HTTP_RESPONSES: { SUCCESS, CONFLICT } } = require('../constants')
 const { Course } = require('../models')
 
 const Courses = (req, res, next) => {
@@ -12,7 +12,7 @@ const Courses = (req, res, next) => {
       })
       .catch(err => {
         if (err) next(err)
-        res.status(NOT_FOUND.CODE).json(NOT_FOUND.JSON)
+        res.status(CONFLICT.CODE).json({ message: 'error while trying to get courses' })
         return
       }) 
 }
