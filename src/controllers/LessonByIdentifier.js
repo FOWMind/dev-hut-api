@@ -1,7 +1,7 @@
 const { HTTP_RESPONSES: { SUCCESS, BAD_REQUEST, CONFLICT } } = require('../constants')
 const { Lesson } = require('../models')
-const { octokit } = require('../lib/octokit')
 const { octokitConfig } = require('../config')
+const Repository = require('../services/Repository')
 
 const LessonByIdentifier = (req, res, next) => {
   let { identifier } = req.params
@@ -17,18 +17,9 @@ const LessonByIdentifier = (req, res, next) => {
     .populate('course')
     .exec()
     .then(async (lesson) => {
-      try {
-        const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-          owner: octokitConfig.lessonsRepoOwner,
-          repo: octokitConfig.lessonsRepoName,
-          path: `${lesson.course.identifier}/${identifier}.md`,
-        })
-
-        const content = Buffer.from(data.content, data.encoding).toString('utf8')
-        return res.status(SUCCESS.CODE).json({ ...lesson._doc, content })
-      } catch (err) {
-        return res.status(SUCCESS.CODE).json(lesson)
-      }
+      const content = await Repository.getContent(octokitConfig.lessonsRepoOwner, octokitConfig.lessonsRepoName, `${lesson?.course?.identifier}/${lesson?.identifier}.md`)
+      if (!content) return res.status(SUCCESS.CODE).json(lesson)
+      return res.status(SUCCESS.CODE).json({ ...lesson._doc, content })
     })
     .catch(err => {
       if (err) next(err)
