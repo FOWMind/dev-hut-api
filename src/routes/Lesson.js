@@ -1,10 +1,11 @@
 const express = require('express')
 
-const { LessonAdd, LessonById, LessonDelete, LessonEdit } = require('../controllers')
+const { LessonAdd, LessonById, LessonByIdentifier, LessonDelete, LessonEdit } = require('../controllers')
 
 const router = express.Router()
 
-router.get('/:id', LessonById)
+router.get('/id/:id', LessonById)
+router.get('/:identifier', LessonByIdentifier)
 router.post('/', LessonAdd)
 router.delete('/:id', LessonDelete)
 router.put('/:id', LessonEdit)

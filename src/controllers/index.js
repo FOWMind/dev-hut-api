@@ -13,6 +13,7 @@ const { Courses } = require('./Courses')
 const { CoursesByTechnology } = require('./CoursesByTechnology')
 
 const { LessonAdd } = require('./LessonAdd')
+const { LessonByIdentifier } = require('./LessonByIdentifier')
 const { LessonById } = require('./LessonById')
 const { LessonDelete } = require('./LessonDelete')
 const { LessonEdit } = require('./LessonEdit')
@@ -34,6 +35,7 @@ module.exports = {
 	Courses,
   CoursesByTechnology,
 	LessonAdd,
+  LessonByIdentifier,
 	LessonById,
 	LessonDelete,
 	LessonEdit,
