@@ -3,7 +3,7 @@ const { HTTP_RESPONSES: { CREATED, BAD_REQUEST, CONFLICT } } = require('../const
 const { Lesson, Course } = require('../models')
 
 const LessonAdd = async (req, res, next) => {
-  const { name, description, identifier, courseId } = req.body
+  const { name, description, identifier, course } = req.body
 
   if (
     Object.entries(req.body) === 0 ||
@@ -11,8 +11,8 @@ const LessonAdd = async (req, res, next) => {
     !name ||
     !description ||
     !identifier ||
-    !courseId ||
-    !validObjectId(courseId)
+    !course ||
+    !validObjectId(course)
   ) {
     res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
@@ -24,7 +24,7 @@ const LessonAdd = async (req, res, next) => {
     return
   }
 
-  const relatedCourse = await Course.findById(courseId)
+  const relatedCourse = await Course.findById(course)
   if (!relatedCourse) {
     res.status(BAD_REQUEST.CODE).json({ message: 'cannot find course with that id' })
     return
