@@ -10,7 +10,10 @@ const LessonById = (req, res, next) => {
     return
   }
 
-  Lesson.findById(id)
+  Lesson
+    .findById(id)
+    .populate('course')
+    .exec()
     .then(lesson => {
       if (!lesson) {
         res.status(NOT_FOUND.CODE).json(NOT_FOUND.JSON)

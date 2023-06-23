@@ -3,14 +3,13 @@ const { HTTP_RESPONSES: { CREATED, BAD_REQUEST, CONFLICT } } = require('../const
 const { Lesson, Course } = require('../models')
 
 const LessonAdd = async (req, res, next) => {
-  const { name, description, contentFileName, identifier, courseId } = req.body
+  const { name, description, identifier, courseId } = req.body
 
   if (
     Object.entries(req.body) === 0 ||
     !req.body ||
     !name ||
     !description ||
-    !contentFileName ||
     !identifier ||
     !courseId ||
     !validObjectId(courseId)
@@ -34,7 +33,6 @@ const LessonAdd = async (req, res, next) => {
   const newLesson = {
     name,
     description,
-    contentFileName,
     identifier,
     courseId: relatedCourse._id,
     createdAt: new Date(),

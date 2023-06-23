@@ -12,13 +12,16 @@ const LessonByIdentifier = (req, res, next) => {
   }
 
   identifier = identifier.toLowerCase() 
-  Lesson.findOne({ identifier })
+  Lesson
+    .findOne({ identifier })
+    .populate('course')
+    .exec()
     .then(async (lesson) => {
       try {
         const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-          owner: octokitConfig.repoOwner,
-          repo: octokitConfig.repoName,
-          path: `/lessons/${identifier}.md`
+          owner: octokitConfig.lessonsRepoName,
+          repo: octokitConfig.lessonsRepoName,
+          path: `${lesson.course.identifier}/${identifier}.md`,
         })
 
         const content = Buffer.from(data.content, data.encoding).toString('utf8')

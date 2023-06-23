@@ -1,7 +1,5 @@
 const { model, Schema } = require('mongoose')
 
-const { lessonSchema } = require('./Lesson')
-
 const courseSchema = new Schema({
   name: String,
   description: String,

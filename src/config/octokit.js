@@ -1,7 +1,9 @@
 const octokitConfig = {
 	authToken: process.env.OCTOKIT_API_TOKEN,
-	repoOwner: process.env.OCTOKIT_API_REPO_OWNER,
-	repoName: process.env.OCTOKIT_API_REPO_NAME,
+	repoOwner: 'adanj27',
+	repoName: 'Web-Dev-Hut-Open-Source',
+  lessonsRepoOwner: 'adanj27',
+  lessonsRepoName: 'web-dev-hut-md',
 }
 
 module.exports = { octokitConfig }
