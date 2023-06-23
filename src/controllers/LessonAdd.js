@@ -34,7 +34,7 @@ const LessonAdd = async (req, res, next) => {
     name,
     description,
     identifier,
-    courseId: relatedCourse._id,
+    course: relatedCourse._id,
     createdAt: new Date(),
   }
 
