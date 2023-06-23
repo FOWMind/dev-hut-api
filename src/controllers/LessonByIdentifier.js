@@ -19,7 +19,7 @@ const LessonByIdentifier = (req, res, next) => {
     .then(async (lesson) => {
       try {
         const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-          owner: octokitConfig.lessonsRepoName,
+          owner: octokitConfig.lessonsRepoOwner,
           repo: octokitConfig.lessonsRepoName,
           path: `${lesson.course.identifier}/${identifier}.md`,
         })
