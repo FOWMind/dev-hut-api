@@ -2,7 +2,10 @@ const { HTTP_RESPONSES: { SUCCESS, CONFLICT } } = require('../constants')
 const { Lesson } = require('../models')
 
 const Lessons = (req, res, next) => {
-  Lesson.find()
+  Lesson
+    .find()
+    .populate('course')
+    .exec()
     .then(lessons => {
       res.status(SUCCESS.CODE).json(lessons)
       return
