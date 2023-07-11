@@ -4,6 +4,7 @@ const technologySchema = new Schema({
   name: String,
   description: String,
   categories: [String],
+  areas: [String],
   images: {
     banner: String,
     icon: String,

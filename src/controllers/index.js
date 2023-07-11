@@ -3,6 +3,7 @@ const { TechnologyAdd } = require('./TechnologyAdd')
 const { TechnologyDelete } = require('./TechnologyDelete')
 const { TechnologyEdit } = require('./TechnologyEdit')
 const { Technologies } = require('./Technologies')
+const { TechnologiesByArea } = require('./TechnologiesByArea')
 
 const { CourseByIdentifier } = require('./CourseByIdentifier')
 const { CourseById } = require('./CourseById')
@@ -22,23 +23,24 @@ const { Lessons } = require('./Lessons')
 const { Collaborators } = require('./Collaborators')
 
 module.exports = {
-	TechnologyByName,
-	TechnologyAdd,
-	TechnologyDelete,
-	TechnologyEdit,
-	Technologies,
+  TechnologyByName,
+  TechnologyAdd,
+  TechnologyDelete,
+  TechnologyEdit,
+  Technologies,
+  TechnologiesByArea,
   CourseByIdentifier,
   CourseById,
-	CourseAdd,
-	CourseEdit,
-	CourseDelete,
-	Courses,
+  CourseAdd,
+  CourseEdit,
+  CourseDelete,
+  Courses,
   CoursesByTechnology,
-	LessonAdd,
+  LessonAdd,
   LessonByIdentifier,
-	LessonById,
-	LessonDelete,
-	LessonEdit,
-	Lessons,
-	Collaborators,
+  LessonById,
+  LessonDelete,
+  LessonEdit,
+  Lessons,
+  Collaborators,
 }

@@ -4,7 +4,7 @@ const {
 } = require('../constants')
 
 const TechnologyAdd = async (req, res, next) => {
-  const { name, description, categories, images, identifier } = req.body
+  const { name, description, categories, areas, images, identifier } = req.body
 
   if (
     Object.entries(req.body).length === 0 ||
@@ -12,6 +12,7 @@ const TechnologyAdd = async (req, res, next) => {
     !name ||
     !description ||
     !categories ||
+    !areas ||
     !images ||
     !images?.banner ||
     !identifier
@@ -30,6 +31,7 @@ const TechnologyAdd = async (req, res, next) => {
     name,
     description,
     categories,
+    areas,
     images,
     identifier,
     createdAt: new Date(),
