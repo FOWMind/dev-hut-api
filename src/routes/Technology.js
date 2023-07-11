@@ -1,12 +1,14 @@
 const express = require('express')
 const markdown = require('../lib/markdown')
 
+const { TechnologyByName, TechnologyAdd, TechnologyDelete, TechnologyEdit } = require('../controllers')
+const { Technology } = require('../models')
+
 const router = express.Router()
 
-router.get('/:name', (req, res, next) => {
-	const { name } = req.params
-	const md = markdown.parse(name)
-	res.status(200).send({ html: md })
-})
+router.get('/:name', TechnologyByName)
+router.post('/', TechnologyAdd)
+router.delete('/:id', TechnologyDelete)
+router.put('/:id', TechnologyEdit)
 
 module.exports = router
