@@ -1,8 +1,10 @@
 const { Technology } = require('../models')
-const { HTTP_RESPONSES: { CREATED, BAD_REQUEST, CONFLICT } } = require('../constants')
+const {
+  HTTP_RESPONSES: { CREATED, BAD_REQUEST, CONFLICT },
+} = require('../constants')
 
 const TechnologyAdd = async (req, res, next) => {
-  const { name, description, categories, identifier } = req.body
+  const { name, description, categories, images, identifier } = req.body
 
   if (
     Object.entries(req.body).length === 0 ||
@@ -10,6 +12,8 @@ const TechnologyAdd = async (req, res, next) => {
     !name ||
     !description ||
     !categories ||
+    !images ||
+    !images?.banner ||
     !identifier
   ) {
     res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
@@ -26,17 +30,18 @@ const TechnologyAdd = async (req, res, next) => {
     name,
     description,
     categories,
+    images,
     identifier,
     createdAt: new Date(),
   }
 
   Technology.create(newTechnology)
-    .then(doc => {
+    .then((doc) => {
       console.log('Technology added at ', newTechnology.createdAt)
       res.status(CREATED.CODE).json({ message: 'technology added', data: doc })
       return
     })
-    .catch(err => {
+    .catch((err) => {
       if (err) next(err)
       res.status(CONFLICT.CODE).json({ message: 'error while adding technology' })
       return

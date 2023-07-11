@@ -1,17 +1,14 @@
 const { validObjectId } = require('../utils')
 const { Technology } = require('../models')
-const { HTTP_RESPONSES: { SUCCESS, BAD_REQUEST, NOT_FOUND, CONFLICT } } = require('../constants')
+const {
+  HTTP_RESPONSES: { SUCCESS, BAD_REQUEST, NOT_FOUND, CONFLICT },
+} = require('../constants')
 
 const TechnologyEdit = (req, res, next) => {
   const { id } = req.params
   const update = req.body
 
-  if (
-    !id ||
-    !validObjectId(id) ||
-    !req.body ||
-    Object.entries(update).length === 0
-  ) {
+  if (!id || !validObjectId(id) || !req.body || Object.entries(update).length === 0) {
     res.status(BAD_REQUEST.CODE).json(BAD_REQUEST.JSON)
     return
   }
@@ -24,10 +21,10 @@ const TechnologyEdit = (req, res, next) => {
         return
       }
 
-      res.status(SUCCESS.CODE).json({ message: 'technology edited successfully', data: doc })
+      res.status(SUCCESS.CODE).json({ message: 'technology edited successfully', data: editedTechnology })
       return
     })
-    .catch(err => {
+    .catch((err) => {
       if (err) next(err)
       res.status(CONFLICT.CODE).json({ message: 'error while editing technology' })
       return
